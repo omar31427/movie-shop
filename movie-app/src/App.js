@@ -28,9 +28,9 @@ const App = () => {
                             <FetchTMDBContextProvider>
                                 <Routes>
                                     <Route path="/" element={<NavBar />}>
-                                        <Route path="/Search" element={<Search />} />
+                                        <Route path="/Search" element={<Search  />} />
                                         <Route path="/Cart" element={<Cart />} />
-                                        <Route path="/CheckOut" element={<CheckOut />} />
+                                        <Route path="/CheckOut" element={<CheckOut/>} />
                                     </Route>
                                 </Routes>
                             </FetchTMDBContextProvider>

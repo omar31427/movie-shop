@@ -2,25 +2,21 @@ import React, {useState, useRef, useEffect, useContext} from 'react'
 
 
 import "../style/Search.css"
-import {SearchBarContext} from "../contexts/SearchBarContext";
-import SearchBarComponent from "../components/SearchBar";
-import DiscoverButton from "../components/DiscoverButton";
 
 import axios, {post} from "axios";
-import {Button} from "react-bootstrap";
 import {CartInfoContext} from "../contexts/CartInfoContext";
+
 
 const imagePath = 'https://image.tmdb.org/t/p/original'
 const Cart = () => {
 
     const [cartItems,setCartItems] = useState([]);
-    const {cartTotal,setCartTotal,setNumCartItems} = useContext(CartInfoContext);
+    const cartInfo = useContext(CartInfoContext);
 
     const getCart = async()=>{
         try{
             const response = await axios.get('/api/getCart');
 
-            console.log("get cart response = " + response.data);
             setCartItems(response.data);
 
         } catch (error) {
@@ -30,7 +26,8 @@ const Cart = () => {
     const getCartTotal = async()=>{
         try {
             const response = await axios.get('/api/getCartTotal');
-            setCartTotal(response.data);
+
+            cartInfo.setCartTotal(response.data);
         } catch (error) {
             console.error('Error fetching data:', error);
         }
@@ -46,7 +43,8 @@ const Cart = () => {
                     id:id
                 },
             });
-            setNumCartItems((num)=>num-1);
+
+            cartInfo.handleRemoveFromCart();
             updateCart();
         } catch (error) {
             console.error('Error fetching data:', error);
@@ -57,25 +55,26 @@ const Cart = () => {
     const clearCart = async()=>{
       try {
           const response = await axios.get('/api/clearCart');
-          console.log(response);
+
+
           updateCart();
       } catch (error) {
           console.error('Error fetching data:', error);
       }
     };
 
+    const handleCheckOutClick = ()=>{
+        window.location.href = '/CheckOut';
+    }
     useEffect(() => {
         updateCart();
     },[]);
 
     return(
     <>
-
-
-
             <div className="row" style = {{marginBottom : '25px'}}>
-                <h3 className="col-4">Total: {cartTotal}</h3>
-                <button  type="button" className='btn btn-outline-primary col-4'>Checkout</button>
+                <h3 className="col-4">Total: {cartInfo.cartTotal}</h3>
+                <button  type="button" onClick = {()=>handleCheckOutClick()} className='btn btn-outline-primary col-4'>Checkout</button>
 
                 <button type="button"  className='btn btn-outline-danger col-4'
                     onClick={()=>clearCart()}>Clear Cart</button>

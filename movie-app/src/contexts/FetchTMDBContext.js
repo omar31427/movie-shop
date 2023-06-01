@@ -48,11 +48,11 @@ export const FetchTMDBContextProvider = ({children}) => {
                 page: page
             },
         });
-            console.log(res.data.results)
+
 
             return res.data
         } catch (error) {
-            console.error('Error fetching data:', error);
+
         }
     };
 

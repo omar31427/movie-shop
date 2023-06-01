@@ -45,9 +45,6 @@ public class SpringSessionController {
     @GetMapping("/getCart")
     public ResponseEntity<ArrayList<CartItem>> getCartItems() {
 
-        String temp = "access granted";
-        System.out.println(temp);
-
         return  ResponseEntity.ok(cart.getCart());
 
     }
@@ -61,7 +58,7 @@ public class SpringSessionController {
     }
     @GetMapping("/clearCart")
     public ResponseEntity<String> clearCart(){
-        System.out.println("clearing cart in control");
+
         if (!cart.getCart().isEmpty())
             cart.clearCart();
 

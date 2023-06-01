@@ -35,7 +35,7 @@ public class Cart implements Serializable {
     }
     public void clearCart(){
         cart.clear();
-        System.out.println("cart cleared");
+
     }
     public float getCartTotal(){
         float Total = 0;

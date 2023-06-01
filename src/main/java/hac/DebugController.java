@@ -1,12 +1,11 @@
 package hac;
 
+import hac.controllers.CartItem;
 import hac.repo.Purchase;
 import hac.repo.PurchaseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,11 +23,22 @@ public class DebugController {
 
     @GetMapping("/purchases")
     public List<Purchase> showPurchases() {
+
         return repository.findAll(); // this is a JPA method to get all the purchases
     }
 
-    @PostMapping("/purchases")
+  /*  @PostMapping("/purchases")
     public Purchase addPurchase(Purchase purchase) {
         return repository.save(purchase); // this is a JPA method to save a purchase to the database
+    }*/
+    @CrossOrigin
+    @PostMapping("/addPurchase")
+    public ResponseEntity<String> addToCart(@RequestParam("firstName") String firstName,
+                                            @RequestParam("lastName") String lastName,
+                                            @RequestParam("email") String email,
+                                            @RequestParam("payment") Double payment) {
+        Purchase purchase = new Purchase(email,payment,firstName,lastName);
+        repository.save(purchase);
+        return ResponseEntity.ok("Movie successfully added to cart");
     }
 }

@@ -1,8 +1,14 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/7Tmn2VQK)
 
 # Authors
+Omar Abdel Al
 
 # Explanations
+In this exercise we were asked to create a website in which we can order movies. 
+The website takes the movies from and api and shows them to the user. The user is able to add the 
+movies to his cart, search for movies via the search bar or by the discover button, and check out.
+The total amount of money should appear in the cart page and also in the checkout page. It 
+should also be modified if the user empties the cart or deletes movies from the cart.
 
 ---------------------
 
